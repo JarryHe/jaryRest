@@ -1,4 +1,4 @@
-package com.didapinche.rs.template.config;
+package com.jary.rs.jaryrest.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

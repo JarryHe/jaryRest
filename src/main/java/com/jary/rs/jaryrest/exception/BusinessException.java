@@ -1,4 +1,4 @@
-package com.didapinche.rs.template.exception;
+package com.jary.rs.jaryrest.exception;
 
 /**
  * 业务异常

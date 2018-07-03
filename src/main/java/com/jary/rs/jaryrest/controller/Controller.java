@@ -1,8 +1,7 @@
-package com.didapinche.rs.template.controller;
+package com.jary.rs.jaryrest.controller;
 
-import com.didapinche.rs.template.exception.BusinessException;
-import com.didapinche.rs.template.service.DemoService;
-import lombok.extern.slf4j.Slf4j;
+import com.jary.rs.jaryrest.exception.BusinessException;
+import com.jary.rs.jaryrest.service.DemoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class Controller {
     @ResponseBody
     public String sayHello(@ModelAttribute("name") String name) throws BusinessException {
         logger.info("test=========={}", "hahaha");
-        return demoService.sayHello().toJson();
+        return demoService.sayHello();
     }
 
 }
