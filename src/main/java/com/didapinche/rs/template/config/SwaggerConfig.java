@@ -1,0 +1,34 @@
+package com.didapinche.rs.template.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import javax.servlet.ServletContext;
+
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+
+
+    @Bean
+    public Docket createRestApi(ServletContext context) {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()  // 选择那些路径和api会生成document
+//                .apis(new Predicate<RequestHandler>() {
+//                    @Override
+//                    public boolean apply(RequestHandler input) {
+//                        if(!input.getHandlerMethod().getBeanType().getName().contains("didapinche")) {
+//                            return false;
+//                        }
+//                        return true;
+//                    }
+//                }) // 对所有api进行监控
+                .paths(PathSelectors.any()) // 对所有路径进行监控
+                .build();
+    }
+
+}

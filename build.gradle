@@ -1,0 +1,106 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.7.RELEASE'
+	}
+	repositories {
+		mavenLocal()
+		maven { url "http://maven.didapinche.com:8081/nexus/content/groups/public/" }
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'org.springframework.boot'
+//apply plugin: 'war'
+
+dependencyManagement {
+	imports {
+		mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2'
+	}
+}
+
+group = 'com.didapinche'
+version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = 1.7
+
+
+repositories {
+	mavenLocal()
+	maven { url "http://maven.didapinche.com:8081/nexus/content/groups/public/" }
+	mavenCentral()
+}
+
+configurations {
+	providedRuntime
+}
+
+processResources {
+	from('src/main/java') {
+		include '**/*.xml'
+	}
+}
+
+task copyXml(type: Copy) {
+	from('build/resources/main/com') {
+		include '**/*'
+	}
+	into('build/classes/java/main/com')
+}
+jar.dependsOn(copyXml)
+
+
+dependencies {
+	//spring boot
+	compile('org.springframework.boot:spring-boot-starter-web')
+
+	//dida metrics
+	compile group: 'com.didapinche', name: "dida-metrics-mvc", version:'1.0-SNAPSHOT'
+
+
+	//dida common
+	compile group: 'com.didapinche', name: "server-commons-common", version:'1.2.4-SNAPSHOT'
+	//compile group: 'com.didapinche', name: "server-commons-mapper", version:'1.2.3-SNAPSHOT'
+
+	//dida autoconfigure
+	compile('com.didapinche:autoconfigure-common:1.0.0-SNAPSHOT')
+	compile('com.didapinche:autoconfigure-servlet-async:1.0.0-SNAPSHOT')
+	//compile('com.didapinche:autoconfigure-mysql-didapinche-slave:1.0.0-SNAPSHOT')
+	//compile('com.didapinche:autoconfigure-mysql-misc-all:1.0.0-SNAPSHOT')
+	//compile('com.didapinche:autoconfigure-redis:1.0.0-SNAPSHOT')
+	//compile('com.didapinche:autoconfigure-rocketmq:1.0.0-SNAPSHOT')
+	//compile('com.didapinche:autoconfigure-thrift-client:1.0.0-SNAPSHOT')
+	//compile('com.didapinche:autoconfigure-memcache:1.0.0-SNAPSHOT')
+	//compile('com.didapinche:autoconfigure-sms:1.0.0-SNAPSHOT')
+	//compile('com.didapinche:autoconfigure-push:1.0.0-SNAPSHOT')
+	//compile('com.didapinche:autoconfigure-message:1.0.0-SNAPSHOT')
+
+	// hystrix
+	// https://mvnrepository.com/artifact/com.netflix.hystrix/hystrix-javanica
+	// compile group: 'com.netflix.hystrix', name: 'hystrix-javanica'
+
+	// eureka
+	compile 'org.springframework.cloud:spring-cloud-starter-eureka'
+
+	// swagger
+	compile group:'io.springfox',name:'springfox-swagger2',version:'2.7.0'
+	compile group:'io.springfox',name:'springfox-swagger-ui',version:'2.7.0'
+	// security
+	compile 'org.springframework.boot:spring-boot-starter-security'
+	// config server
+	compile 'org.springframework.cloud:spring-cloud-starter-config'
+	compile 'org.springframework.cloud:spring-cloud-starter-bus-kafka'
+	// slf4j lombok
+	compile 'org.projectlombok:lombok'
+
+	//test
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+configurations.all {
+	exclude module: 'slf4j-log4j12'
+	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
