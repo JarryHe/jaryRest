@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by yangyongxin on 2017/10/24.
  */
 @RestController
+@RequestMapping("/jary")
 public class Controller {
 
     @Autowired
@@ -23,16 +24,19 @@ public class Controller {
     private static Logger logger = LoggerFactory.getLogger(Controller.class);
 
 
-    /**
-     * @param name
-     * @return
-     * @throws BusinessException
-     */
-    @RequestMapping(value = "/sayHello", method = {RequestMethod.GET}, produces="application/json;charset=UTF-8")
+    @RequestMapping(value = "/info", method = {RequestMethod.GET}, produces="application/json;charset=UTF-8")
     @ResponseBody
-    public String sayHello(@ModelAttribute("name") String name) throws BusinessException {
-        logger.info("test=========={}", "hahaha");
-        return demoService.sayHello();
+    public String getInfo(@ModelAttribute("name") String name) throws BusinessException {
+        logger.info("getInfo=========={}");
+        return demoService.getInfo(name);
+    }
+
+    @RequestMapping(value = "/info", method = {RequestMethod.POST}, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String setInfo(@ModelAttribute("key") String key,
+                          @ModelAttribute("value") String value) throws BusinessException {
+        logger.info("setInfo=========={}");
+        return demoService.setInfo(key, value);
     }
 
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="30 seconds" debug="false">
-    <property name="appName" value="template-rs-service"/>
-    <property name="logDir" value="/applogs/template-rs-service"/>
+    <property name="appName" value="jaryRest"/>
+    <property name="logDir" value="/application/applogs/jaryRest"/>
 
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>

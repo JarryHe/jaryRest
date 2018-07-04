@@ -67,7 +67,7 @@ dependencies {
 	compile group: 'com.google.guava', name: 'guava', version: '18.0'
 	compile group: 'com.alibaba', name: 'fastjson', version: '1.2.33'
 	compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.8.3'
-	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
+	compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
 	runtime group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.7.25'
 	runtime group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.7.25'
 	runtime group: 'org.slf4j', name: 'jul-to-slf4j', version: '1.7.25'
@@ -81,9 +81,6 @@ dependencies {
 	compile group:'io.springfox',name:'springfox-swagger-ui',version:'2.7.0'
 	// security
 	compile 'org.springframework.boot:spring-boot-starter-security'
-	// config server
-	compile 'org.springframework.cloud:spring-cloud-starter-config'
-	compile 'org.springframework.cloud:spring-cloud-starter-bus-kafka'
 
 	//test
 	testCompile('org.springframework.boot:spring-boot-starter-test')
